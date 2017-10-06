@@ -3,7 +3,8 @@
 */
 
 <template>
-    <div class="card" @mouseenter="mouseOn()" @mouseleave="mouseOff()">
+    <div class="card" @mouseenter="mouseOn()" @mouseleave="mouseOff()"
+         @click="$router.push({name:'viewOther', appid:app.app_other_id})">
       <div class="big-left">
       <div class="left">
         <div class="container">

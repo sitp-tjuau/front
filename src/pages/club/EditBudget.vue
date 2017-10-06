@@ -3,27 +3,25 @@
 */
 
 <template>
-    <div class="container">
-      <h1>申请其它</h1>
-      <div class="form-container">
-        <div class="left">
-          <el-form ref="form" :model="form" label-width="80px">
-            <el-form-item label="活动名称">
-              <el-input v-model="form.activity_name"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="onSubmit">立即创建</el-button>
-              <el-button>取消</el-button>
-            </el-form-item>
-          </el-form>
-        </div>
-        <div class="right">
-          <annexs :manage="true" :annexs="annexs"></annexs>
-        </div>
-
+    <div class="form-container">
+      <div class="left">
+        <el-form ref="form" :model="form">
+          <el-form-item>
+            <el-input v-model="form.activity_name">
+              <template slot="prepend">活动名称</template>
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit" class="btn">提  交</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div class="right">
+        <annexs :manage="true" :annexs="annexs"></annexs>
       </div>
 
     </div>
+
 </template>
 
 <script>
@@ -66,20 +64,20 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .container {
-    padding: 10px;
-    color: #324057;
-  }
   .form-container {
     display: flex;
     justify-content: space-between;
   }
   .left {
-    width: 300px;
+    width: 500px;
 
+  }
+  .btn {
+    width: 500px;
   }
   .right {
     width: 400px;
-    border-radius: 100px;
+    border-radius: 10px;
+    overflow: hidden;
   }
 </style>

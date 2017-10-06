@@ -21,7 +21,7 @@
           <span slot="label"><i class="iconfont icon-jiazai"></i> 等待审批</span>
         </el-tab-pane>
       </el-tabs>
-      <div><el-button @click="$router.push('/club/other/new')">提交新申请</el-button></div>
+      <div><el-button @click="$router.push('/app/other')">提交新申请</el-button></div>
     </div>
     <transition-group tag="div" name="fades">
       <other-card v-for="app in apps_filter" :app="app" :key="app.app_other_id"></other-card>

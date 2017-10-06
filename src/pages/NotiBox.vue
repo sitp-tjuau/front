@@ -13,7 +13,7 @@
               <span slot="label"><i class="iconfont icon-weidu"></i> 未读 <el-badge class="mark" :value="count" /></span>
             </el-tab-pane>
             <el-tab-pane label="已读通知" name="read"></el-tab-pane>
-            <el-tab-pane label="系统消息" name="system"></el-tab-pane>
+            <el-tab-pane label="我发出的" name="system"></el-tab-pane>
           </el-tabs>
         </div>
         <div id="message-items">

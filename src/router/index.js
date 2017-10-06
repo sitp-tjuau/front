@@ -18,7 +18,16 @@ import otherPage from 'PAGES/club/OtherPage'
 import posterPage from 'PAGES/club/PosterPage'
 import settingPage from 'PAGES/club/SettingPage'
 import sitePage from 'PAGES/club/SitePage'
-import newOther from 'PAGES/club/NewOther'
+
+import editBudget from 'PAGES/club/EditBudget'
+import editSite from 'PAGES/club/EditSite'
+import editPoster from 'PAGES/club/EditPoster'
+import editOther from 'PAGES/club/EditOther'
+import viewApp from 'PAGES/club/ViewApp'
+import viewBudget from 'PAGES/club/ViewBudget'
+import viewSite from 'PAGES/club/ViewSite'
+import viewPoster from 'PAGES/club/ViewPoster'
+import viewOther from 'PAGES/club/ViewOther'
 
 Vue.use(Router)
 
@@ -34,69 +43,115 @@ const routes = [
   {
     path: '/',
     component: home,
-    redirect: '/club',
+    redirect: '/club/0',
     children: [{
       path: '/setting',
+      name: 'mySetting',
       component: setting
     }, {
       path: '/404',
       component: notFoundPage
     }, {
-      path: '/club',
+      path: '/club/:clubid',
+      name: 'club',
       component: club,
-      redirect: '/club/index',
+      redirect: 'index',
       children: [
         {
-          path: '/club/index',
+          path: '/club/:clubid/index',
           name: 'index',
           component: indexPage
         },
         {
-          path: '/club/budget',
+          path: '/club/:clubid/budget',
           name: 'budget',
           component: budgetPage
         },
         {
-          path: '/club/poster',
+          path: '/club/:clubid/poster',
           name: 'poster',
           component: posterPage
         },
         {
-          path: '/club/setting',
+          path: '/club/:clubid/setting',
           name: 'setting',
           component: settingPage
         },
         {
-          path: '/club/site',
+          path: '/club/:clubid/site',
           name: 'site',
           component: sitePage
         },
         {
-          path: '/club/other',
+          path: '/club/:clubid/other',
           name: 'other',
           component: otherPage
         },
         {
-          path: '/club/other/new',
-          name: 'other',
-          component: newOther
+          path: '/app',
+          redirect: 'app/budget',
+          component: viewApp,
+          children: [
+            {
+              path: '/app/budget',
+              name: 'appBudget',
+              component: editBudget
+            },
+            {
+              path: '/app/poster',
+              name: 'appPoster',
+              component: editPoster
+            },
+            {
+              path: '/app/site',
+              name: 'appSite',
+              component: editSite
+            },
+            {
+              path: '/app/other',
+              name: 'appOther',
+              component: editOther
+            },
+            {
+              path: '/app/budget/:appid',
+              name: 'viewBudget',
+              component: viewBudget
+            },
+            {
+              path: '/app/poster/:appid',
+              name: 'viewPoster',
+              component: viewPoster
+            },
+            {
+              path: '/app/site/:appid',
+              name: 'viewSite',
+              component: viewSite
+            },
+            {
+              path: '/app/other/:appid',
+              name: 'viewOther',
+              component: viewOther
+            }
+          ]
         }
       ]
     }, {
       path: '/noti',
       component: notiBox,
-      children: [{
-        path: '/notification/:nid',
-        name: 'notiDetail',
-        component: notiDetail
-      }, {
-        path: '/send',
-        component: newNoti
-      }
+      children: [
+        {
+          path: '/notification/:nid',
+          name: 'notiDetail',
+          component: notiDetail
+        },
+        {
+          path: '/send',
+          component: newNoti
+        }
       ]
     }]
   }, {
-    path: '*',
+    path: '/hi',
     redirect: '/404'
   }
 ]

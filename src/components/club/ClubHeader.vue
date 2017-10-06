@@ -55,7 +55,12 @@
     },
     methods: {
       selectPage (m) {
-        this.$router.push(m.link)
+        this.$router.push({
+          name: m.name,
+          params: {
+            clubid: this.$router.params.clubid
+          }
+        })
       }
     }
   }
