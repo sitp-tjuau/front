@@ -22,7 +22,7 @@
             <div id="title-text">{{ noti.title }}</div>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" content="含附件" placement="right">
-            <i @click="this.location.href='#annexs'" id="annex-icon" v-if="annexs" class="iconfont icon-lianjie"></i>
+            <i @click="this.location.href='#annexs'" id="annex-icon" v-if="annexs" class="iconfont icon-fujian-tianchong"></i>
           </el-tooltip>
         </div>
 

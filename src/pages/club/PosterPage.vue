@@ -21,7 +21,7 @@
           <span slot="label"><i class="iconfont icon-jiazai"></i> 等待审批</span>
         </el-tab-pane>
       </el-tabs>
-      <div><el-button>提交新物料张贴申请</el-button></div>
+      <div><el-button @click="$router.push({name:'appPoster'})">提交新物料张贴申请</el-button></div>
     </div>
     <transition-group tag="div" name="fades">
       <poster-card v-for="app in apps_filter" :app="app" :key="app.app_poster_id"></poster-card>

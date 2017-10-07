@@ -109,7 +109,7 @@
     font-size: 24px;
   }
   .item {
-    margin-left: -25px;
+    margin-left: -20px;
     margin-top: -30px;
   }
   #message-items {

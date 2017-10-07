@@ -12,7 +12,7 @@
             <el-tab-pane name="unread">
               <span slot="label"><i class="iconfont icon-weidu"></i> 未读 <el-badge class="mark" :value="count" /></span>
             </el-tab-pane>
-            <el-tab-pane label="已读通知" name="read"></el-tab-pane>
+            <el-tab-pane label="公共通知" name="read"></el-tab-pane>
             <el-tab-pane label="我发出的" name="system"></el-tab-pane>
           </el-tabs>
         </div>
@@ -24,11 +24,11 @@
         </div>
       </div>
       <div class="right">
-          <transition name="router-fade" mode="out-in">
+          <transition name="router-fade-kk" mode="out-in">
             <router-view></router-view>
           </transition>
       </div>
-      <i class="iconfont new-noti icon-zixuan" v-show="'notiDetail' === $route.name" @click="$router.push('/send')"></i>
+      <i class="iconfont new-noti icon-zixuan" v-show="'noti' === $route.name" @click="$router.push({name: 'send'})"></i>
     </div>
 </template>
 
@@ -174,13 +174,13 @@
     margin-bottom: -16px;
   }
 
-  .router-fade-enter-active {
-    animation: bounce-in-page .5s;
+  .router-fade-kk-enter-active {
+    animation: bounce-in-sspage .5s;
   }
-  .router-fade-leave-active {
-    animation: bounce-in-page-reverse .5s;
+  .router-fade-kk-leave-active {
+    animation: bounce-in-sspage-reverse .5s;
   }
-  @keyframes bounce-in-page {
+  @keyframes bounce-in-sspage {
     0% {
       opacity: 0;
       transform: translateY(-500px);
@@ -191,10 +191,12 @@
       opacity: 0.5;
     }
     100% {
+      opacity: 1;
     }
   }
-  @keyframes bounce-in-page-reverse {
+  @keyframes bounce-in-sspage-reverse {
     0% {
+      opacity: 1;
     }
     50% {
       transform: scaleX(0.5);
@@ -222,5 +224,4 @@
   .new-noti:active {
     color: #007eb5;
   }
-
 </style>

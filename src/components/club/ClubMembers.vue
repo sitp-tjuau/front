@@ -60,7 +60,7 @@
     },
     methods: {
       sendToAll () {
-        this.$router.push({ path: '/send', query: { to: this.users.map(e => e.user_id).join(',') } })
+        this.$router.push({ name: 'send', query: { to: this.users.map(e => e.user_id).join(',') } })
         // this.$router.push('/send?to=' +
       }
     }

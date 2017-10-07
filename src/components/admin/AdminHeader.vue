@@ -5,26 +5,19 @@
 <template>
     <div id="header">
       <div id="left">
-        <div id="logo">
-          <img :src="club.logo">
-        </div>
-        <div id="info-right">
-          <div id="clubname">{{club.name}}</div>
-          <div id="clubdesc">{{club.description}}</div>
+        <div id="info">
+          <div id="adminname">管理后台</div>
+          <div id="admindesc">同济大学社团联合会</div>
         </div>
       </div>
       <div id="right">
-        <div class="title-text" v-if="club_id === club.club_id">欢迎光临，您是本社团的 <title-tag :title="title"></title-tag> 。</div>
-        <div class="title-text" v-else-if="power >= 2">尊敬的 <title-tag :title="title"></title-tag> ，你好。</div>
-        <div class="title-text" v-else>欢迎访问{{club.name}}。</div>
+        <div class="title-text">尊敬的 <title-tag :title="title"></title-tag> ，你好。</div>
         <div id="menu">
 
             <div  v-for="m in menus" class="menu-item" :key="m.key"
                   :class="$route.name === m.name?'menu-item-current':''"
                   @click="selectPage(m)"
-                  v-if="power >= 1 || ((club_id === club.club_id || !m.self) && ((power === 1) || m.power))"
             >{{m.title}}</div>
-
         </div>
       </div>
 
@@ -36,19 +29,18 @@
   export default {
     name: 'ClubHeader',
     components: { TitleTag },
-    props: ['club'],
     data () {
       return {
-        title: '宣传部副部长',
-        club_id: 0,
-        power: 0,
+        title: '社团联管理员',
+        power: 2,
         menus: [
-          { key: 0, title: '首页', link: '/club/index', name: 'index', self: false, power: true },
-          { key: 1, title: '预算', link: '/club/budget', name: 'budget', self: true, power: true },
-          { key: 2, title: '物料', link: '/club/poster', name: 'poster', self: true, power: true },
-          { key: 3, title: '场地', link: '/club/site', name: 'site', self: true, power: true },
-          { key: 4, title: '其它', link: '/club/other', name: 'other', self: true, power: true },
-          { key: 5, title: '设置', link: '/club/setting', name: 'setting', self: true, power: false }
+          { key: 0, title: '首页', link: '/admin/index', name: 'adminIndex' },
+          { key: 1, title: '审批', link: '/admin/apps', name: 'adminApps' },
+          { key: 2, title: '社团', link: '/admin/clubs', name: 'adminClubs' },
+          { key: 3, title: '人员', link: '/admin/users', name: 'adminUsers' },
+          { key: 4, title: '职位', link: '/admin/titles', name: 'adminTitles' },
+          { key: 5, title: '场地', link: '/admin/sites', name: 'adminSites' },
+          { key: 6, title: '日志', link: '/admin/logs', name: 'adminLogs' }
         ],
         currentPage: 0
       }
@@ -56,10 +48,7 @@
     methods: {
       selectPage (m) {
         this.$router.push({
-          name: m.name,
-          params: {
-            clubid: this.$route.params.clubid
-          }
+          name: m.name
         })
       }
     }
@@ -75,8 +64,7 @@
     justify-content: space-between;
   }
   #left {
-    display: flex;
-    flex-direction: row;
+
   }
   #right {
     display: flex;
@@ -90,21 +78,12 @@
     line-height: 30px;
     font-size: 16px;
   }
-  #logo > img {
-    width: 80px;
-    height: 80px;
-    border: #99A9BF solid 1px;
-    border-radius: 20%;
-  }
-  #info-right {
-    padding-left: 20px;
-  }
-  #clubname {
+  #adminname {
     color: #324057;
     font-size: 30px;
     line-height: 50px;
   }
-  #clubdesc {
+  #admindesc {
     color: #8492A6;
     line-height: 20px;
     font-size: 16px;

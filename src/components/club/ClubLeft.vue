@@ -9,7 +9,7 @@
         <club-members></club-members>
       </div>
     </transition>
-    <div class="pull-item" @click="showMenu=!showMenu" :class="showMenu?'pull-item-active':''">
+    <div class="pull-item" @click="showmenu()" :class="showMenu?'pull-item-active':''">
       <i class="iconfont icon-yonghuzu"></i><span v-if="showMenu"> 社团成员</span>
     </div>
   </div>
@@ -23,6 +23,14 @@
     data () {
       return {
         showMenu: false
+      }
+    },
+    methods: {
+      showmenu () {
+        setTimeout(
+          () => {
+            this.showMenu = !this.showMenu
+          }, 50)
       }
     },
     watch: {

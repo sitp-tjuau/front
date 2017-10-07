@@ -55,7 +55,7 @@
     cursor: pointer;
     background: #EFF2F7;
     height: 50px;
-    font-size: 16px;
+    font-size: 14px;
     padding-left: 24px;
     border-radius: 10px;
     margin-bottom: 10px;

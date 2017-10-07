@@ -21,7 +21,7 @@
             <span slot="label"><i class="iconfont icon-jiazai"></i> 等待审批</span>
           </el-tab-pane>
         </el-tabs>
-        <div><el-button>提交新预算申请</el-button></div>
+        <div><el-button @click="$router.push({name:'appBudget'})">提交新预算申请</el-button></div>
       </div>
       <transition-group name="fades" tag="div">
         <budget-card v-for="app in apps_filter" :app="app" :key="app.app_budget_id"></budget-card>

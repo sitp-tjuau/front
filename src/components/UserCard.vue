@@ -18,7 +18,7 @@
           <div class="more">
             <slot name="more"></slot>
           </div>
-          <i class="message iconfont icon-xinxi1" @click="$router.push('/send?to='+user.user_id)"></i>
+          <i class="message iconfont icon-xinxi1" @click="$router.push({name:'send',query:{to:user.user_id}})"></i>
           <div class="my-avatar">
             <img :src="user.avatar">
           </div>

@@ -11,7 +11,7 @@
       <div id="right">
         <div id="main">
           <div id="title">
-            <span :class="item.state===1?'unread':''">{{item.title}}</span> <i class='iconfont icon-weidu' v-if="item.state === 1"></i>
+            <span :class="item.state===1?'unread':''">{{item.title}}</span> <i class='iconfont icon-new1' v-if="item.state === 1"></i>
           </div>
           <div id="content" :class="item.state===1?'unread':''">
             {{item.content}}
@@ -58,7 +58,12 @@
       },
       gotoNoti () {
         console.log(this.type)
-        this.$router.push('/notification/' + this.item.notification_id)
+        this.$router.push({
+          name: 'noti',
+          params: {
+            nid: this.item.notification_id
+          }
+        })
       }
     }
 
@@ -143,5 +148,9 @@
     line-height: 60px;
     height: 60px;
     overflow: hidden;
+  }
+  .icon-new1 {
+    font-size: 20px;
+    color: #1D8CE0;
   }
 </style>

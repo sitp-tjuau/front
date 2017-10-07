@@ -42,7 +42,7 @@
         >
 
       <el-tooltip class="item" effect="dark" content="含附件" placement="right">
-        <i id="annex-icon" v-if="annexs" class="iconfont icon-lianjie"></i>
+        <i id="annex-icon" v-if="annexs" class="iconfont icon-fujian-tianchong"></i>
       </el-tooltip>
     </div>
 
@@ -191,7 +191,7 @@
     methods: {
       fetchData () {
         if (this.$route.query.to) {
-          this.noti.receivers_id = this.$route.query.to.split(',').map(e => parseInt(e))
+          this.noti.receivers_id = ('' + (this.$route.query.to)).split(',').map(e => parseInt(e))
         }
       }
     }

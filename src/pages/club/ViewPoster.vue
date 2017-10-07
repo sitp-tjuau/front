@@ -3,37 +3,74 @@
 */
 
 <template>
-  <div class="form-container">
-    <div class="left">
-      <el-form ref="form" :model="form">
-        <el-form-item>
-          <el-input v-model="form.activity_name">
-            <template slot="prepend">活动名称</template>
-          </el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit" class="btn">提  交</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="right">
-      <annexs :manage="true" :annexs="annexs"></annexs>
-    </div>
+  <div class="view">
+    <div class="form-container">
+      <div class="left">
+        <div class="item-group">
+          <div class="item">
+            <el-tag type="primary" class="q">申请社团</el-tag>
+            <club-name class="a" :name="form.club_name" :club_id="form.club_id"></club-name>
+          </div>
+          <div class="item">
+            <el-tag type="success" class="q">申请类型</el-tag>
+            <div class="a">物料张贴类申请表</div>
+          </div>
+        </div>
+        <div class="item-group">
+          <div class="item">
+            <el-tag type="danger" class="q">申请人</el-tag>
+            <username-and-avatar class="a"></username-and-avatar>
+          </div>
+          <div class="item">
+            <el-tag type="warning" class="q">申请表提交时间</el-tag>
+            <div class="a">{{ form.created_at }}</div>
+          </div>
+        </div>
+        <hr>
+        <div class="item">
+          <el-tag class="q">活动名称</el-tag> <div class="a">{{form.activity_name }}</div>
+        </div>
+        <div class="item">
+          <el-tag class="q">活动日期</el-tag> <div class="a">{{form.activity_time }}</div>
+        </div>
+        <div class="item">
+          <el-tag class="q">海报张贴开始日期</el-tag> <div class="a">{{form.start_time }}</div>
+        </div>
+        <div class="item">
+          <el-tag class="q">海报张贴场地</el-tag> <div class="a">{{form.post_site_name }}</div>
+        </div>
 
+      </div>
+      <div class="right">
+        <annexs :manage="false" :annexs="annexs"></annexs>
+      </div>
+    </div>
+    <app-bottom></app-bottom>
   </div>
 
 </template>
 
 <script>
+  import AppBottom from 'COMPONENTS/club/AppBottom'
+  import UsernameAndAvatar from 'COMPONENTS/UsernameAndAvatar'
+  import ClubName from 'COMPONENTS/ClubName'
   import Annexs from 'COMPONENTS/annexs/Annexs'
   export default {
     components: {
-      Annexs
+      Annexs,
+      AppBottom,
+      ClubName,
+      UsernameAndAvatar
     },
     data () {
       return {
         form: {
-          activity_name: ''
+          club_name: '嘻嘻嘻',
+          created_at: '2011年3月11日',
+          activity_name: '某活动',
+          start_time: '2018年11月17日',
+          activity_time: '2011年3月7日',
+          post_site_name: '对对对'
         },
         annexs: [
           {
@@ -79,5 +116,24 @@
     width: 400px;
     border-radius: 10px;
     overflow: hidden;
+  }
+  .item-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .item {
+    display: flex;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .q {
+
+    line-height: 20px;
+  }
+  .a {
+    margin-left: 10px;
+    line-height: 20px;
+    font-size: 14px;
+
   }
 </style>

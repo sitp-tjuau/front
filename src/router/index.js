@@ -8,6 +8,15 @@ import login from 'PAGES/Login'
 import register from 'PAGES/Register'
 import setting from 'PAGES/Setting'
 
+import admin from 'PAGES/admin/Admin'
+import adminIndex from 'PAGES/admin/AdminIndex'
+import adminClubs from 'PAGES/admin/AdminClubs'
+import adminUsers from 'PAGES/admin/AdminUsers'
+import adminTitles from 'PAGES/admin/AdminTitles'
+import adminLogs from 'PAGES/admin/AdminLogs'
+import adminSites from 'PAGES/admin/AdminSites'
+import adminApps from 'PAGES/admin/AdminApps'
+
 import notiBox from 'PAGES/NotiBox'
 import notiDetail from 'PAGES/NotiDetail'
 import newNoti from 'PAGES/NewNoti'
@@ -34,16 +43,22 @@ Vue.use(Router)
 const routes = [
   {
     path: '/login',
+    name: 'login',
     component: login
   },
   {
     path: '/register/:code',
+    name: 'register',
     component: register
   },
   {
     path: '/',
+    name: 'home',
     component: home,
-    redirect: '/club/0',
+    redirect: {
+      name: 'index',
+      params: { clubid: 0 }
+    },
     children: [{
       path: '/setting',
       name: 'mySetting',
@@ -55,7 +70,7 @@ const routes = [
       path: '/club/:clubid',
       name: 'club',
       component: club,
-      redirect: 'index',
+      redirect: '/club/:clubid/index',
       children: [
         {
           path: '/club/:clubid/index',
@@ -88,47 +103,47 @@ const routes = [
           component: otherPage
         },
         {
-          path: '/app',
-          redirect: 'app/budget',
+          path: '/club/:clubid/app/',
+          redirect: '/club/:clubid/app/budget',
           component: viewApp,
           children: [
             {
-              path: '/app/budget',
+              path: '/club/:clubid/app/budget',
               name: 'appBudget',
               component: editBudget
             },
             {
-              path: '/app/poster',
+              path: '/club/:clubid/app/poster',
               name: 'appPoster',
               component: editPoster
             },
             {
-              path: '/app/site',
+              path: '/club/:clubid/app/site',
               name: 'appSite',
               component: editSite
             },
             {
-              path: '/app/other',
+              path: '/club/:clubid/app/other',
               name: 'appOther',
               component: editOther
             },
             {
-              path: '/app/budget/:appid',
+              path: '/club/:clubid/app/budget/:appid',
               name: 'viewBudget',
               component: viewBudget
             },
             {
-              path: '/app/poster/:appid',
+              path: '/club/:clubid/app/poster/:appid',
               name: 'viewPoster',
               component: viewPoster
             },
             {
-              path: '/app/site/:appid',
+              path: '/club/:clubid/app/site/:appid',
               name: 'viewSite',
               component: viewSite
             },
             {
-              path: '/app/other/:appid',
+              path: '/club/:clubid/app/other/:appid',
               name: 'viewOther',
               component: viewOther
             }
@@ -136,22 +151,64 @@ const routes = [
         }
       ]
     }, {
+      path: '/admin',
+      component: admin,
+      children: [
+        {
+          path: '/admin/index',
+          name: 'adminIndex',
+          component: adminIndex
+        },
+        {
+          path: '/admin/apps',
+          name: 'adminApps',
+          component: adminApps
+        },
+        {
+          path: '/admin/titles',
+          name: 'adminTitles',
+          component: adminTitles
+        },
+        {
+          path: '/admin/logs',
+          name: 'adminLogs',
+          component: adminLogs
+        },
+        {
+          path: '/admin/users',
+          name: 'adminUsers',
+          component: adminUsers
+        },
+        {
+          path: '/admin/clubs',
+          name: 'adminClubs',
+          component: adminClubs
+        },
+        {
+          path: '/admin/sites',
+          name: 'adminSites',
+          component: adminSites
+        }
+      ]
+    }, {
       path: '/noti',
       component: notiBox,
       children: [
         {
-          path: '/notification/:nid',
-          name: 'notiDetail',
+          path: '/notification/:nid?',
+          name: 'noti',
           component: notiDetail
         },
         {
           path: '/send',
+          name: 'send',
           component: newNoti
         }
       ]
     }]
   }, {
-    path: '/hi',
+    path: '*',
+    name: '404',
     redirect: '/404'
   }
 ]

@@ -3,37 +3,98 @@
 */
 
 <template>
-  <div class="form-container">
-    <div class="left">
-      <el-form ref="form" :model="form">
-        <el-form-item>
-          <el-input v-model="form.activity_name">
-            <template slot="prepend">活动名称</template>
-          </el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit" class="btn">提  交</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="right">
-      <annexs :manage="true" :annexs="annexs"></annexs>
-    </div>
+  <div class="view">
+    <div class="form-container">
+      <div class="left">
+        <div class="item-group">
+          <div class="item">
+            <el-tag type="primary" class="q">申请社团</el-tag>
+            <club-name class="a" :name="form.club_name" :club_id="form.club_id"></club-name>
+          </div>
+          <div class="item">
+            <el-tag type="success" class="q">申请类型</el-tag>
+            <div class="a">活动场地类申请表</div>
+          </div>
+        </div>
+        <div class="item-group">
+          <div class="item">
+            <el-tag type="danger" class="q">申请人</el-tag>
+            <username-and-avatar class="a"></username-and-avatar>
+          </div>
+          <div class="item">
+            <el-tag type="warning" class="q">申请表提交时间</el-tag>
+            <div class="a">{{ form.created_at }}</div>
+          </div>
+        </div>
+        <hr>
+        <div class="item">
+          <el-tag class="q">活动名称</el-tag> <div class="a">{{form.activity_name }}</div>
+        </div>
+        <div class="item">
+          <el-tag class="q">活动时间</el-tag> <div class="a">{{form.activity_time }}</div>
+        </div>
+        <div class="item">
+          <el-tag class="q">活动地点</el-tag> <div class="a">{{form.site_name }}</div>
+        </div>
+        <div class="item">
 
+          <el-tag class="q">活动内容</el-tag>
+          <div class="a"><el-button type="text" @click="dialogVisible = true">点击放大展示</el-button></div>
+
+
+
+
+        </div>
+        <div class="ahtml" v-html="form.activity_content">
+          {{form.activity_content }}
+        </div>
+        <el-dialog
+          title="活动内容"
+          :visible.sync="dialogVisible"
+          size="large">
+          <div class="bhtml" v-html="form.activity_content">{{form.activity_content }}</div>
+          <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible = false">关  闭</el-button>
+          </span>
+        </el-dialog>
+      </div>
+      <div class="right">
+        <annexs :manage="false" :annexs="annexs"></annexs>
+      </div>
+    </div>
+    <app-bottom></app-bottom>
   </div>
 
 </template>
 
 <script>
+  import AppBottom from 'COMPONENTS/club/AppBottom'
+  import UsernameAndAvatar from 'COMPONENTS/UsernameAndAvatar'
+  import ClubName from 'COMPONENTS/ClubName'
   import Annexs from 'COMPONENTS/annexs/Annexs'
+  import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
+
   export default {
     components: {
-      Annexs
+      ElButton,
+      Annexs,
+      AppBottom,
+      ClubName,
+      UsernameAndAvatar
     },
     data () {
       return {
+        dialogVisible: false,
         form: {
-          activity_name: ''
+          app_site_id: '',
+          created_at: '2017年3月17日 22:15',
+          club_id: 0,
+          club_name: '魔鬼社团',
+          user_id: 1,
+          activity_name: '某活动',
+          activity_content: '<h1>大字报</h1><p>hi</p><h1>大字报</h1><p>hi</p><h1>大字报</h1><p>hi</p><h1>大字报</h1><p>hi</p><h1>大字报</h1><p>hi</p>',
+          activity_time: '2017年3月14日',
+          site_name: '哈哈哈'
         },
         annexs: [
           {
@@ -69,15 +130,44 @@
     justify-content: space-between;
   }
   .left {
-    width: 500px;
+    width: 660px;
 
   }
-  .btn {
-    width: 500px;
-  }
   .right {
-    width: 400px;
+    width: 260px;
     border-radius: 10px;
     overflow: hidden;
+  }
+  .item-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .item {
+    display: flex;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .q {
+
+    line-height: 20px;
+  }
+  .a {
+    margin-left: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+  }
+  .ahtml {
+    border: 0.5px #efefef solid;
+    margin-bottom: 28px;
+    width: 640px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .bhtml {
+    height: calc(100vh - 300px);
+    overflow: auto;
   }
 </style>
