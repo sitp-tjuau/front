@@ -118,12 +118,10 @@
     margin-bottom: 3px;
   }
   .q {
-
-    line-height: 20px;
   }
   .a {
     margin-left: 10px;
-    line-height: 20px;
+    line-height: 30px;
     font-size: 14px;
 
   }

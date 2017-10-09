@@ -7,13 +7,18 @@
   <el-dialog
     title="邀请新成员"
     :visible.sync="dialogVisible"
-    size="small"
+    width="400px"
     @open="reOpen()"
     :modal="true"
     :modal-append-to-body="false"
     >
+
+
     <div v-if="step === 0" style="text-align: center">
+      <el-form>
+      <el-form-item>
       <span>请为被邀请者选择社团： </span>
+
       <el-select v-model="currentClub"
                  :disabled="power<2"
                  @change="chooseClub()"
@@ -32,12 +37,12 @@
           </el-option>
         </el-option-group>
       </el-select>
-      <br>
+      </el-form-item>
+      <el-form-item>
       <span>请为被邀请者设置职位： </span>
       <el-select v-model="currentTitle"
                  :disabled="currentClub === ''"
-                 @change="chooseClub()"
-                 filterable placeholder="请选择或输入搜索社团" class="up-select">
+                 filterable placeholder="请选择或输入搜索职位" class="up-select">
         <el-option-group
           v-for="group in titles_filter"
           :key="group.label"
@@ -53,6 +58,8 @@
           </el-option>
         </el-option-group>
       </el-select>
+      </el-form-item>
+      </el-form>
     </div>
     <div v-else>
       <div>请将以下链接发送给您要邀请的对象：</div>
@@ -79,8 +86,8 @@
         power: 2,
         club_id: 3,
         dialogVisible: false,
-        currentTitle: '',
-        currentClub: '',
+        currentTitle: null,
+        currentClub: null,
         powerToDesc: [
           '社团成员', '社团负责人', '社团联成员', '超级管理员'
         ],
@@ -152,7 +159,7 @@
       }
     },
     mounted () {
-      for (var i = 0; i < 4; i++) {
+      for (let i = 0; i < 4; i++) {
         this.titles_filter.push({
           label: this.powerToDesc[i],
           disabled: false,
@@ -208,7 +215,6 @@
     color: #20A0FF;
   }
   .up-select {
-    margin-bottom: 10px;
   }
 
 </style>

@@ -153,6 +153,7 @@ const routes = [
     }, {
       path: '/admin',
       component: admin,
+      redirect: '/admin/index',
       children: [
         {
           path: '/admin/index',
@@ -162,7 +163,30 @@ const routes = [
         {
           path: '/admin/apps',
           name: 'adminApps',
-          component: adminApps
+          component: adminApps,
+          redirect: '/admin/apps/budget',
+          children: [
+            {
+              path: '/admin/apps/budget',
+              name: 'adminAppsBudget',
+              component: budgetPage
+            },
+            {
+              path: '/admin/apps/site',
+              name: 'adminAppsSite',
+              component: sitePage
+            },
+            {
+              path: '/admin/apps/poster',
+              name: 'adminAppsPoster',
+              component: posterPage
+            },
+            {
+              path: '/admin/apps/other',
+              name: 'adminAppsOther',
+              component: otherPage
+            }
+          ]
         },
         {
           path: '/admin/titles',

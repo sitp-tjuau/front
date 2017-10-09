@@ -24,7 +24,7 @@
     },
     methods: {
       handleAvatarSuccess (res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
+        this.imageurl = URL.createObjectURL(file.raw)
       },
       beforeAvatarUpload (file) {
         const isJPG = file.type === 'image/jpeg'
@@ -51,7 +51,7 @@
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
+    border-color: #409EFF;
   }
   .avatar-uploader-icon {
     font-size: 28px;
@@ -66,4 +66,5 @@
     height: 178px;
     display: block;
   }
+
 </style>

@@ -28,13 +28,13 @@
         </div>
         <hr>
         <div class="item">
-          <el-tag class="q">活动名称</el-tag> <div class="a">{{form.activity_name }}</div>
+          <el-tag type="danger" class="q">活动名称</el-tag> <div class="a">{{form.activity_name }}</div>
         </div>
         <div class="item">
-          <el-tag class="q">活动日期</el-tag> <div class="a">{{form.activity_time }}</div>
+          <el-tag type="info" class="q">活动日期</el-tag> <div class="a">{{form.activity_time }}</div>
         </div>
         <div class="item">
-          <el-tag class="q">海报张贴开始日期</el-tag> <div class="a">{{form.start_time }}</div>
+          <el-tag type="warning" class="q">海报张贴开始日期</el-tag> <div class="a">{{form.start_time }}</div>
         </div>
         <div class="item">
           <el-tag class="q">海报张贴场地</el-tag> <div class="a">{{form.post_site_name }}</div>
@@ -127,12 +127,10 @@
     margin-bottom: 3px;
   }
   .q {
-
-    line-height: 20px;
   }
   .a {
     margin-left: 10px;
-    line-height: 20px;
+    line-height: 30px;
     font-size: 14px;
 
   }

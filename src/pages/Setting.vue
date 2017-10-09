@@ -5,8 +5,8 @@
 <template>
   <div class="login">
     <div class="login-container">
-      <el-tabs  v-model="activeTab"  type="card">
-        <el-tab-pane label="个人资料修改">
+      <el-tabs  v-model="activeTab">
+        <el-tab-pane label="个性资料">
 
           <el-form :model="form" ref="form" label-width="0" class="form">
             <el-form-item prop="name">
@@ -14,9 +14,9 @@
             </el-form-item>
             <el-form-item prop="campus">
               <el-radio-group v-model="form.campus">
-                <el-radio-button label="所在的[校区]" :disabled="true"></el-radio-button>
-                <el-radio-button label="四平路校区"></el-radio-button>
-                <el-radio-button label="嘉定校区"></el-radio-button>
+                <el-radio-button style="margin-left:2px;" label="所在校区" :disabled="true"></el-radio-button>
+                <el-radio-button class="radio-button" label="四平路校区"></el-radio-button>
+                <el-radio-button class="radio-button" label="嘉定校区"></el-radio-button>
               </el-radio-group>
             </el-form-item>
             <el-form-item prop="description">
@@ -33,7 +33,7 @@
           </el-form>
 
         </el-tab-pane>
-        <el-tab-pane label="密码修改">
+        <el-tab-pane label="密码">
           <el-form :model="form1" ref="form1" label-width="0" class="form">
             <el-form-item prop="password">
               <el-input type="password" v-model="form1.password" placeholder="新密码"></el-input>
@@ -50,10 +50,10 @@
 
         </el-tab-pane>
 
-        <el-tab-pane label="头像修改">
+        <el-tab-pane label="头像">
           <el-form :model="form2" ref="form2" label-width="0" class="form">
             <el-form-item prop="avatar">
-              <avatar-upload :imageUrl="form2.avatar"></avatar-upload>
+              <avatar-upload :imageUrl="form2.avatar" style="margin-left: 10px;"></avatar-upload>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('form2')"
@@ -108,15 +108,15 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .login {
+    background: white;
+    width: 330px;
+    margin: auto;
+    padding: 0px;
+    border-radius: 20px;
+    padding-top: 3px;
   }
   .login-container {
-    background: white;
-    margin-top: calc((100vh - 600px) / 2);
-    width: 300px;
-    margin-left: calc((100vw - 400px) / 2);
-    margin-right: calc((100vw - 400px) / 2);
-    padding: 40px;
-    border-radius: 20px;
+    margin: 15px;
   }
   .logo {
     background: #20A0FF;
@@ -130,7 +130,7 @@
     margin-top: 20px;
   }
   .login-btn {
-    width: 300px;
+    width: 100%;
   }
   .code {
     text-align: center;
@@ -139,5 +139,8 @@
   }
   .active {
     color: #58B7FF;
+  }
+  .radio-button {
+    margin-left: -3px;
   }
 </style>

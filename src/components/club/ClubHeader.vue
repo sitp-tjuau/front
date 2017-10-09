@@ -39,7 +39,7 @@
     props: ['club'],
     data () {
       return {
-        title: '宣传部副部长',
+        title: '宣传部部长',
         club_id: 0,
         power: 0,
         menus: [

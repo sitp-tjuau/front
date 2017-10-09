@@ -3,7 +3,7 @@
 */
 
 <template>
-      <el-tag :type="trans[title]?trans[title]:''">{{title}}</el-tag>
+      <el-tag size="mini" :type="trans[title]?trans[title]:''">{{title}}</el-tag>
 </template>
 
 <script>

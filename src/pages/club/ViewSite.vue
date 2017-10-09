@@ -51,7 +51,9 @@
         <el-dialog
           title="活动内容"
           :visible.sync="dialogVisible"
-          size="large">
+          top="7vh"
+          width="90%"
+        >
           <div class="bhtml" v-html="form.activity_content">{{form.activity_content }}</div>
           <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="dialogVisible = false">关  闭</el-button>
@@ -148,12 +150,10 @@
     margin-bottom: 3px;
   }
   .q {
-
-    line-height: 20px;
   }
   .a {
     margin-left: 10px;
-    line-height: 20px;
+    line-height: 30px;
     font-size: 14px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -167,7 +167,9 @@
     cursor: pointer;
   }
   .bhtml {
-    height: calc(100vh - 300px);
+    height: calc(55vh);
+    margin-top: -20px;
+    margin-bottom: -20px;
     overflow: auto;
   }
 </style>

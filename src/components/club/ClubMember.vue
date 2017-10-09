@@ -6,15 +6,7 @@
   <div id="container">
     <user-card :user="user">
       <div slot="more" v-if="power >= 1">
-        <el-dropdown trigger="click">
-          <i class="more iconfont icon-shezhi1"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item><i class="iconfont icon-bukejian"></i> 删除成员</el-dropdown-item>
-            <el-dropdown-item><i class="iconfont icon-huiyuan"></i> 分配其它职位</el-dropdown-item>
-            <el-dropdown-item v-if="power===1"><i class="iconfont icon-yanzhengma"></i> 转让社长职位</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-
+        <user-card-manage :userid="user.user_id" :power="power"></user-card-manage>
       </div>
       <div id="item">
         <avatar :avatar="user.avatar" size="middle"></avatar>
@@ -29,6 +21,7 @@
   import UserCard from 'COMPONENTS/UserCard.vue'
   import Avatar from 'COMPONENTS/Avatar.vue'
   import TitleTag from 'COMPONENTS/TitleTag.vue'
+  import UserCardManage from 'COMPONENTS/UserCardManage.vue'
   export default {
     data () {
       return {
@@ -50,7 +43,8 @@
     components: {
       UserCard,
       Avatar,
-      TitleTag
+      TitleTag,
+      UserCardManage
     }
   }
 </script>
@@ -80,14 +74,6 @@
   #name:hover {
     color:#1D8CE0;
   }
-  .more{
-    cursor: pointer;
-    color: #C0CCDA;
-    font-size: 40px;
-    line-height: 50px;
-  }
-  .more:hover {
-    color: #ffffff;
-  }
+
 </style>
 

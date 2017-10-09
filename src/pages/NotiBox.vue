@@ -39,7 +39,7 @@
     components: {NotiCard, NotFound},
     data () {
       return {
-        activeType: '',
+        activeType: 'all',
         count: 3,
         notis: [
           {
@@ -212,6 +212,7 @@
     position: fixed;
     right: 10px;
     top: 85px;
+    z-index: 500;
     cursor: pointer;
     color: #20A0FF;
   }

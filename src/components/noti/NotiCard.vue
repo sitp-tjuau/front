@@ -48,7 +48,7 @@
     },
     methods: {
       getActive () {
-        this.active = this.$route.params.nid === '' + this.item.notification_id
+        this.active = '' + this.$route.params.nid === '' + this.item.notification_id
       },
       mouseOn () {
         this.mouseIn = true

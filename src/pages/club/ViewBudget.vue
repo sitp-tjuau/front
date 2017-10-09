@@ -56,34 +56,29 @@
 
             <el-table
               :data="value.cost_details"
-              border
               :summary-method="getSummaries"
               show-summary
-              stripe
               style="width: 100%">
               <el-table-column
                 prop="material_name"
-                label="物材名称"
+                label="物料名称"
                 sortable
-                align="center"
+                show-overflow-tooltip
               >
               </el-table-column>
               <el-table-column
                 prop="unit_price"
                 sortable
-                align="center"
                 label="单价/元">
               </el-table-column>
               <el-table-column
                 prop="quantity"
                 sortable
-                align="center"
                 label="数值">
               </el-table-column>
               <el-table-column
                 prop="total_price"
                 sortable
-                align="center"
                 label="总价/元">
               </el-table-column>
             </el-table>
@@ -101,43 +96,36 @@
         <div class="activity-form">
             <el-table
               :data="form.activities"
-              border
               :summary-method="getSummaries"
               show-summary
-              stripe
               style="width: 100%">
               <el-table-column
                 prop="name"
                 label="活动名"
                 sortable
                 show-overflow-tooltip
-                align="center"
               >
               </el-table-column>
               <el-table-column
                 prop="time"
                 label="活动时间"
                 sortable
-                align="center"
               >
               </el-table-column>
               <el-table-column
                 prop="site_name"
                 label="活动地点"
                 sortable
-                align="center"
               >
               </el-table-column>
               <el-table-column
                 prop="material_count"
                 sortable
-                align="center"
                 label="物材数">
               </el-table-column>
               <el-table-column
                 prop="price_count"
                 sortable
-                align="center"
                 label="总价">
               </el-table-column>
             </el-table>
@@ -388,12 +376,10 @@
     margin-bottom: 10px;
   }
   .q {
-
-    line-height: 20px;
   }
   .a {
     margin-left: 10px;
-    line-height: 20px;
+    line-height: 30px;
     font-size: 15px;
 
   }

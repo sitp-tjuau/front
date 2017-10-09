@@ -15,7 +15,7 @@
         <div id="menu">
 
             <div  v-for="m in menus" class="menu-item" :key="m.key"
-                  :class="$route.name === m.name?'menu-item-current':''"
+                  :class="$route.name[5] === m.name[5]?'menu-item-current':''"
                   @click="selectPage(m)"
             >{{m.title}}</div>
         </div>
@@ -27,7 +27,6 @@
 <script>
   import TitleTag from 'COMPONENTS/TitleTag.vue'
   export default {
-    name: 'ClubHeader',
     components: { TitleTag },
     data () {
       return {

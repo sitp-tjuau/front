@@ -13,65 +13,90 @@
           <el-input v-model="form.total_budget" placeholder="在此输入预计总预算">
           </el-input>
         </el-form-item><el-form-item>
-        <el-button type="primary" @click="calcTotal()">刷新表内所列总预算</el-button>
+        <el-button type="info" @click="calcTotal()" round>刷新表内所列总预算</el-button>
       </el-form-item>
       </el-form>
-
       <div v-for="(value, key) in form.activities" :key="key" class="activity">
         <div class="activity-header">
           <div class="activity-name">活动 {{ key+1 }} {{ value.name }} </div>
+          <div>
           <el-button type="text" @click="deleteActivity(key)">
             <i class="iconfont icon-icon_delete"></i> 删除
           </el-button>
+          <el-button type="text" @click="value.collapse = !value.collapse">
+            <span v-if="value.collapse"><i class="el-icon-arrow-down"></i> 展开</span>
+            <span v-else><i class="el-icon-arrow-up"></i> 收起</span>
+          </el-button>
+          </div>
         </div>
-        <div class="activity-form">
+        <transition name="fadedd">
+        <div v-if="!value.collapse">
+          <el-form class="activity-form">
           <div class="activity-left">
-            <el-input v-model="value.name" placeholder="活动名" class="activity-input">
-              <template slot="prepend"><i class="iconfont icon-yonghuzu"></i></template>
-            </el-input>
-            <el-input v-model="value.time" placeholder="活动时间"  class="activity-input">
-              <template slot="prepend"><i class="iconfont icon-jihua"></i></template>
-            </el-input>
-            <el-select v-model="value.site_id" filterable placeholder="活动场地" class="activity-input">
-              <el-option
-                v-for="site in sites"
-                :key="site.id"
-                :label="site.name"
-                :value="site.id">
-              </el-option>
-            </el-select>
+              <el-form-item>
+                <el-input v-model="value.name" placeholder="活动名" class="activity-input">
+                  <i slot="prefix" class="ic iconfont icon-yonghuzu"></i>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input v-model="value.time" placeholder="活动时间"  class="activity-input">
+                  <i slot="prefix" class="ic iconfont icon-jihua"></i>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-select v-model="value.site_id" filterable placeholder="活动场地" class="activity-input">
+                  <el-option
+                    v-for="site in sites"
+                    :key="site.id"
+                    :label="site.name"
+                    :value="site.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
           </div>
           <div class="activity-right">
             <div v-for="(v, k) in value.cost_details" :key="k" class="material">
-              <el-input v-model="v.material_name" placeholder="物材名称" class="material-name-input">
-                <template slot="prepend"><i class="iconfont icon-wupin"></i></template>
+              <el-form-item>
+              <el-input v-model="v.material_name" placeholder="物料名称" class="material-name-input">
+                <i slot="prefix" class="id iconfont icon-wupin"></i>
               </el-input>
+              </el-form-item>
+              <el-form-item>
               <el-input v-model="v.unit_price" placeholder="单价" class="material-input" @change="calcSum(v)">
-                <template slot="prepend"><i class="iconfont icon-danjia"></i></template>
+                <i slot="prefix" class="id iconfont icon-danjia"></i>
               </el-input>
+              </el-form-item>
+              <el-form-item>
               <el-input v-model="v.quantity" placeholder="数量" class="material-input" @change="calcSum(v)">
-                <template slot="prepend"><i class="iconfont icon-shuzi1"></i></template>
+                <i slot="prefix" class="id iconfont icon-shuzi1"></i>
               </el-input>
+              </el-form-item>
+              <el-form-item>
               <el-input v-model="v.total_price" placeholder="总价" class="material-last-input">
-                <template slot="prepend"><i class="iconfont icon-yusuanshenhe"></i></template>
+                <i slot="prefix" class="id iconfont icon-yusuanshenhe"></i>
                 <template slot="append">
                   <el-button type="text" @click="deleteMaterial(value, k)">
-                    &nbsp;<i class="iconfont icon-icon_delete"></i>&nbsp;
+                    &nbsp;<i style="padding-left: 8px" class="iconfont icon-icon_delete"></i>&nbsp;
                   </el-button>
                 </template>
               </el-input>
+              </el-form-item>
             </div>
-            <el-button @click="addMaterial(value)" class="add-m-btn">
-              <i class="iconfont icon-zixuan"></i> 添加新物材
+
+            <el-button @click="addMaterial(value)" class="add-m-btn" type="info" size="mini">
+              <i class="iconfont icon-zixuan"></i> 添加新物料
             </el-button>
           </div>
+          </el-form>
         </div>
+        </transition>
       </div>
-      <el-button @click="addActivity()" type="primary" class="activity">
+
+      <el-button @click="addActivity()" type="primary" class="activity" round :key="-1">
         <i class="iconfont icon-zixuan"></i> 添加新活动
       </el-button>
-
     </div>
+
     <div class="right">
       <annexs :manage="true" :annexs="annexs"></annexs>
     </div>
@@ -100,6 +125,7 @@
             {
               name: '艾滋病宣传',
               time: '2017年3月',
+              collapse: false,
               site_id: 2,
               cost_details: [
                 {
@@ -119,6 +145,7 @@
             {
               name: '艾滋病宣传',
               time: '2017年3月',
+              collapse: false,
               site_id: 2,
               cost_details: [
                 {
@@ -199,6 +226,7 @@
         this.form.activities.push({
           name: '',
           time: '',
+          collapse: false,
           site_id: null,
           cost_details: [
             {
@@ -278,10 +306,10 @@
     width: 165px;
   }
   .material-input {
-    width: 95px;
+    width: 90px;
   }
   .material-last-input {
-    width: 125px;
+    width: 135px;
   }
   .activity {
     margin-bottom: 10px;
@@ -293,5 +321,42 @@
   .activity-header {
     display: flex;
     justify-content: space-between;
+  }
+  .ic {
+    line-height: 50px;
+    font-size: 20px;
+    padding-left: 3px;
+  }
+  .id {
+    font-size: 16px;
+    line-height: 40px;
+    padding-left: 3px;
+  }
+  .el-form-item {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .fadedd-enter-active {
+    animation: bounce-in-page133 .5s cubic-bezier(.65,.17,.34,1.85)
+  }
+  .fadedd-leave-active {
+    animation: bounce-in-page-reverse133 .5s cubic-bezier(.82,-0.7,.33,1.05)
+  }
+  @keyframes bounce-in-page133 {
+    0% {
+      transform: translateY(-50%) scaleY(0);
+
+    }
+    100% {
+    }
+  }
+  @keyframes bounce-in-page-reverse133 {
+    0% {
+    }
+    100% {
+      transform: translateY(-50%)  scaleY(0);
+    }
   }
 </style>

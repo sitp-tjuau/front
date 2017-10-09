@@ -17,15 +17,16 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .success {
-    color:#13CE66;
+    color:#67C23A;
     font-weight:bold
   }
   .fail {
-    color: #FF4949;
+    color: #FA5555;
     font-weight:bold
   }
   .waiting {
-    color: #F7BA2A;
+    color: #EB9E05;
+    font-weight:bold
   }
 
 </style>

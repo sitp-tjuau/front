@@ -7,26 +7,30 @@
     <div id="header">
       <div id="header-left">
         <div class="header-left-item" v-if="!noti.is_public">发给&nbsp;</div>
-        <el-select
-          v-model="noti.receivers_id"
-          multiple
-          filterable
-          default-first-option
-          placeholder="请输入或选择发送对象"
-          no-match-text="找不到该用户名。"
-          no-data-text="加载错误，请稍后再试。"
-          class="select-receiver"
-          v-if="!noti.is_public"
-        >
-          <el-option
-            v-for="user in users"
-            :key="user.user_id"
-            :label="user.name"
-            :value="user.user_id">
-            <span style="float: left">{{ user.name }}</span>
-            <span class="float-right">{{ user.club_name }} - {{ user.title_name }}</span>
-          </el-option>
-        </el-select>
+        <el-form>
+          <el-form-item style="margin-bottom: 0px">
+            <el-select
+              v-model="noti.receivers_id"
+              multiple
+              filterable
+              default-first-option
+              placeholder="请输入或选择发送对象"
+              no-match-text="找不到该用户名。"
+              no-data-text="加载错误，请稍后再试。"
+              class="select-receiver"
+              v-if="!noti.is_public"
+            >
+              <el-option
+                v-for="user in users"
+                :key="user.user_id"
+                :label="user.name"
+                :value="user.user_id">
+                <span style="float: left">{{ user.name }}</span>
+                <span class="float-right">{{ user.club_name }} - {{ user.title_name }}</span>
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
 
       </div>
       <div class="type" v-if="power > 1" :class="noti.is_public?'icon-active':''" @click="noti.is_public = !noti.is_public">
@@ -192,6 +196,9 @@
       fetchData () {
         if (this.$route.query.to) {
           this.noti.receivers_id = ('' + (this.$route.query.to)).split(',').map(e => parseInt(e))
+        }
+        if (this.$route.query.all && this.$route.query.all === 'true') {
+          this.noti.is_public = true
         }
       }
     }

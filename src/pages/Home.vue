@@ -18,6 +18,7 @@
       </div>
     </div>
     <div id="home-container">
+
       <transition name="router-fade2" mode="out-in">
         <router-view></router-view>
       </transition>

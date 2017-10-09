@@ -87,7 +87,7 @@
     },
     data () {
       return {
-        power: 2,
+        power: 1,
         show: false,
         simple: false,
         toClass: {
@@ -144,13 +144,13 @@
     color: #FF4949;
   }
   .success-color {
-    color: #13CE66;
+    color: #67C23A;
   }
   .warning-color {
     color: #F7BA2A;
   }
   .danger {
-    background: #FF4949;
+    background: #FA5555;
     border-bottom: 5px solid #ff8c00;
   }
   .danger:hover {
@@ -158,19 +158,19 @@
   }
 
   .success {
-    background: #13CE66;
-    border-bottom: 5px solid #86ffcb;
+    background: #67C23A;
+    border-bottom: 5px solid #006d2e;
   }
 
   .success:hover {
-    background: #13b55b;
+    background: #12a460;
   }
   .warning {
     background: #F7BA2A;
     border-bottom-color: #836500;
   }
   .warning:hover {
-    background: #d4cc1c;
+    background: #d5c20c;
   }
   .user {
     font-size: 16px;

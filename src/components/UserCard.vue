@@ -97,7 +97,7 @@
   .my-avatar img {
     width: 90px;
     height: 90px;
-    margin-top: 20px;
+    margin-top:18px;
     border: white solid 0.5px;
     border-radius: 100%;
   }
@@ -106,16 +106,16 @@
     font-size: 18px;
     line-height: 24px;
     height: 25px;
-    margin-top: 10px;
+    margin-top: 7px;
     color: white;
   }
 
   .my-desc {
     overflow-y: hidden;
-    padding-top: 10px;
+    padding-top: 5px;
     font-size: 14px;
-    line-height: 14px;
-    height: 28px;
+    line-height: 18px;
+    height: 36px;
     /*margin-top: 10px;*/
     color: #99A9BF;
     padding-left: 20px;
@@ -137,12 +137,13 @@
   .que {
     user-select: none;
     cursor: default;
-    padding: 5px;
+    padding: 1px;
     font-size: 16px;
     color: #D3DCE6;
+    padding-left: 5px;
   }
   .ans {
-    padding: 5px 0 15px 28px;
+    padding: 0 0 10px 29px;
     font-size: 14px;
     color: #F9FAFC;
   }

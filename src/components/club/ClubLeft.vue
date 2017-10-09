@@ -62,6 +62,8 @@
     cursor: pointer;
     transition:all 1s;
     font-size: 18px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.5);
   }
   .pull-item:hover {
     width: 240px;
