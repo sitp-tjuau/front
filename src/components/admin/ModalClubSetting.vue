@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import SettingPage from 'PAGES/club/SettingPage'
+  const SettingPage = resolve => require(['PAGES/club/SettingPage'], resolve)
   export default {
     components: {
       SettingPage

@@ -1,8 +1,8 @@
 {
-  "name": "front-end",
+  "name": "front",
   "version": "1.0.0",
   "description": "the front-end of cool-db by Vue2",
-  "author": "monkingxue <1360662499@qq.com>",
+  "author": "dustark",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -11,7 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "element-ui": "^2.0.0-alpha.2",
+    "element-ui": "2.0.0",
     "vue": "^2.2.6",
     "vue-quill-editor": "^2.3.2",
     "vue-router": "^2.3.1",

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import Setting from 'PAGES/Setting'
+  const Setting = resolve => require(['PAGES/Setting'], resolve)
   export default {
     components: {
       Setting

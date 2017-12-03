@@ -18,10 +18,10 @@
           </div>
         </div>
 
-          <div class="time" v-if="!mouseIn">{{ item.created_at }}</div>
+          <div class="time" v-if="!mouseIn">{{ item.created_at | dateTimeFormatter }}</div>
           <div v-else class="doit">
             <i class="iconfont icon-yidu" v-if="item.state===1"></i>
-            <i class="iconfont icon-icon_delete"></i>
+            <i class="iconfont icon-icon_delete" @click="rmNoti(item.notification_id)"></i>
           </div>
       </div>
 
@@ -31,6 +31,8 @@
 
 <script>
   import NotiIcon from 'COMPONENTS/noti/NotiIcon.vue'
+  import { mapActions } from 'vuex'
+  import { SWITCHNOTISTATE } from 'MODULE/noti'
   export default {
     props: ['item', 'type'],
     components: {
@@ -57,14 +59,35 @@
         this.mouseIn = false
       },
       gotoNoti () {
-        console.log(this.type)
         this.$router.push({
           name: 'noti',
           params: {
             nid: this.item.notification_id
           }
         })
-      }
+      },
+      rmNoti (nid) {
+        let index = -1
+        if (this.$route.params.nid === nid) {
+          index = this.notis.findIndex(e => nid === e.notification_id)
+        }
+        this.setState({
+          nid: nid,
+          value: 0
+        })
+        if (index !== -1) {
+          if (!this.notis[index]) index--
+          this.$router.push({
+            name: 'noti',
+            params: {
+              nid: this.notis[index].notification_id
+            }
+          })
+        }
+      },
+      ...mapActions({
+        setState: SWITCHNOTISTATE
+      })
     }
 
   }

@@ -32,7 +32,7 @@
 
 <script>
   import SiteCard from 'COMPONENTS/club/SiteCard.vue'
-  import NotFound from 'COMPONENTS/NotFound.vue'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
   export default {
     components: {
       SiteCard,

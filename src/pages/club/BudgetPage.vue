@@ -32,7 +32,7 @@
 
 <script>
   import BudgetCard from 'COMPONENTS/club/BudgetCard.vue'
-  import NotFound from 'COMPONENTS/NotFound.vue'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
   export default {
     components: {
       BudgetCard,
@@ -49,7 +49,7 @@
             username: '王进喜',
             title: '2017年预算申请',
             check_state: 0,
-            created_at: '2017年3月4日'
+            created_at: '2017/3/6'
           },
           {
             app_budget_id: 2,
@@ -57,7 +57,7 @@
             username: '王进喜',
             title: '2017年预算申请',
             check_state: 2,
-            created_at: '2017年3月4日'
+            created_at: '2017/11/28 3:44'
           },
           {
             app_budget_id: 3,

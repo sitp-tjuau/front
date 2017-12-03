@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import { quillEditor } from 'vue-quill-editor'
+  const { quillEditor } = resolve => require(['vue-quill-editor'], resolve)
 
   export default {
     components: {

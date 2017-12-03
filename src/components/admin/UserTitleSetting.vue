@@ -31,10 +31,8 @@
 </template>
 
 <script>
-  import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item'
   export default {
     components: {
-      ElFormItem
     },
     data () {
       return {

@@ -3,17 +3,23 @@
 */
 
 <template>
-      <el-tag size="mini" :type="trans[title]?trans[title]:''">{{title}}</el-tag>
+  <el-tag v-if="getTitle(title)" size="mini" :type="trans[title]?trans[title]:''">{{ getTitle(title).content }}</el-tag>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
+    computed: {
+      ...mapGetters([
+        'getTitle'
+      ])
+    },
     data () {
       return {
-        trans: {
-          '社长': 'danger',
-          '副社长': 'success'
-        }
+        trans: [
+          'primary', 'danger', 'warning', 'success'
+        ]
       }
     },
     props: ['title']

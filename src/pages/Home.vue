@@ -8,11 +8,11 @@
       <div class="home-header-item home-header-right">
         <noti></noti>
         <el-dropdown @command="handleCommand">
-          <avatar size="middle" id="avatar" :avatar="user.avatar"></avatar>
+          <avatar size="middle" id="avatar" :avatar="my.avatar"></avatar>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item disabled>{{user.name}}</el-dropdown-item>
+            <el-dropdown-item disabled>{{my.name}}</el-dropdown-item>
               <el-dropdown-item divided command="/setting"><i class="iconfont icon-shezhi"></i> 个人设置</el-dropdown-item>
-            <el-dropdown-item command="login"><i class="iconfont icon-tuichudenglu"></i> 退出登录</el-dropdown-item>
+            <el-dropdown-item command="/login"><i class="iconfont icon-tuichudenglu"></i> 退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -30,27 +30,32 @@
   import logo from '@/assets/images/logo.png'
   import Avatar from 'COMPONENTS/Avatar.vue'
   import Noti from 'COMPONENTS/header/Noti.vue'
+  import { mapGetters, mapActions } from 'vuex'
+  import { LOADTITLES } from 'MODULE/title'
   export default {
     data () {
       return {
-        logo,
-        user: {
-          user_id: 0,
-          name: 'DuStark',
-          avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-          club_id: 0,
-          club_name: '同济某社团',
-          title_id: 0,
-          title: '社长'
-        }
+        logo
       }
+    },
+    computed: {
+      ...mapGetters(['updated', 'my'])
     },
     components: {
       Avatar,
       Noti
     },
+    mounted () {
+      this.loadTitles()
+    },
     methods: {
+      ...mapActions({
+        loadTitles: LOADTITLES
+      }),
       handleCommand (command) {
+        if (command === '/login') {
+          localStorage.removeItem('token')
+        }
         this.$router.push(command)
       }
     }

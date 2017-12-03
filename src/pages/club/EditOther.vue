@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import Annexs from 'COMPONENTS/annexs/Annexs'
+  const Annexs = resolve => require(['COMPONENTS/annexs/Annexs'], resolve)
   export default {
     components: {
       Annexs

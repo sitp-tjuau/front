@@ -14,8 +14,8 @@
         </div>
       </div>
       <div id="right">
-        <div class="title-text" v-if="club_id === club.club_id">欢迎光临，您是本社团的 <title-tag :title="title"></title-tag> 。</div>
-        <div class="title-text" v-else-if="power >= 2">尊敬的 <title-tag :title="title"></title-tag> ，你好。</div>
+        <div class="title-text" v-if="my.club_id === club.club_id">欢迎光临，您是本社团的 <title-tag :title="my.title_id"></title-tag> 。</div>
+        <div class="title-text" v-else-if="power >= 2">尊敬的 <title-tag :title="my.title_id"></title-tag> ，你好。</div>
         <div class="title-text" v-else>欢迎访问{{club.name}}。</div>
         <div id="menu">
 
@@ -33,15 +33,16 @@
 
 <script>
   import TitleTag from 'COMPONENTS/TitleTag.vue'
+  import { mapGetters } from 'vuex'
   export default {
     name: 'ClubHeader',
     components: { TitleTag },
     props: ['club'],
+    computed: {
+      ...mapGetters(['power', 'my'])
+    },
     data () {
       return {
-        title: '宣传部部长',
-        club_id: 0,
-        power: 0,
         menus: [
           { key: 0, title: '首页', link: '/club/index', name: 'index', self: false, power: true },
           { key: 1, title: '预算', link: '/club/budget', name: 'budget', self: true, power: true },

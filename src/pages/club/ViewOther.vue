@@ -19,11 +19,11 @@
       <div class="item-group">
       <div class="item">
         <el-tag type="danger" class="q">申请人</el-tag>
-        <username-and-avatar class="a"></username-and-avatar>
+        <username-and-avatar class="a" :user_id="form.user_id"></username-and-avatar>
       </div>
       <div class="item">
         <el-tag type="warning" class="q">申请表提交时间</el-tag>
-        <div class="a">{{ form.created_at }}</div>
+        <div class="a">{{ form.created_at | dateTimeFormatter(1) }}</div>
       </div>
       </div>
       <hr>
@@ -42,10 +42,10 @@
 </template>
 
 <script>
-  import AppBottom from 'COMPONENTS/club/AppBottom'
+  const AppBottom = resolve => require(['COMPONENTS/club/AppBottom'], resolve)
   import UsernameAndAvatar from 'COMPONENTS/UsernameAndAvatar'
   import ClubName from 'COMPONENTS/ClubName'
-  import Annexs from 'COMPONENTS/annexs/Annexs'
+  const Annexs = resolve => require(['COMPONENTS/annexs/Annexs'], resolve)
   export default {
     components: {
       Annexs,

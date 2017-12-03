@@ -32,7 +32,7 @@
 
 <script>
   import OtherCard from 'COMPONENTS/club/OtherCard.vue'
-  import NotFound from 'COMPONENTS/NotFound.vue'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
   export default {
     components: {
       OtherCard,

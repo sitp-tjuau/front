@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import ClubMembers from './ClubMembers'
+  const ClubMembers = resolve => require(['./ClubMembers'], resolve)
   export default {
     components: {ClubMembers},
     data () {

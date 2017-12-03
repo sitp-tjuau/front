@@ -10,7 +10,7 @@ BudgetPage.vue/**
 </template>
 
 <script>
-  import NotFound from 'COMPONENTS/NotFound'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
   export default {
     components: {
       NotFound

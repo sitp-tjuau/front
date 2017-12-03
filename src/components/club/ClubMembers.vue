@@ -5,10 +5,10 @@
 <template>
     <div id="panel">
       <div id="header">
-        当前社团入驻 <el-badge class="mark" :value="users.length" /> 人
+        当前社团入驻 <el-badge class="mark" :value="club_members.length" /> 人
       </div>
       <div id="container">
-      <club-member v-for="user in users" :key="user.user_id"></club-member>
+      <club-member v-for="user in club_members" :user="user" :key="user.user_id"></club-member>
       </div>
       <div id="footer">
         <modal-add-new-member v-if="power > 0"></modal-add-new-member>
@@ -20,6 +20,8 @@
 <script>
   import ClubMember from 'COMPONENTS/club/ClubMember.vue'
   import ModalAddNewMember from 'COMPONENTS/club/ModalAddNewMember.vue'
+  import { mapGetters, mapActions } from 'vuex'
+  import { LOADCLUBMEMBERS } from 'MODULE/club'
   export default {
     components: {
       ClubMember,
@@ -27,42 +29,23 @@
     },
     data () {
       return {
-        power: 1,
-        club_id: 0,
-        dialogVisible: false,
-        users: [
-          {
-            user_id: 0,
-            name: 'DuStark',
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            title: '社长'
-          },
-          {
-            user_id: 1,
-            name: 'DuStark',
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            title: '副社长'
-          },
-          {
-            user_id: 2,
-            name: 'DuStark',
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            title: '副社长'
-          },
-          {
-            user_id: 3,
-            name: 'DuStark',
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            title: '社员'
-          }
-        ]
+        dialogVisible: false
       }
     },
+    computed: {
+      ...mapGetters(['power', 'club_members'])
+    },
     methods: {
+      ...mapActions({
+        initClubMembers: LOADCLUBMEMBERS
+      }),
       sendToAll () {
-        this.$router.push({ name: 'send', query: { to: this.users.map(e => e.user_id).join(',') } })
+        this.$router.push({ name: 'send', query: { to: this.club_members.map(e => e.user_id).join(',') } })
         // this.$router.push('/send?to=' +
       }
+    },
+    mounted () {
+      this.initClubMembers()
     }
   }
 </script>

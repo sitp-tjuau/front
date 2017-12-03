@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import UserTitleSetting from 'COMPONENTS/admin/UserTitleSetting'
+  const UserTitleSetting = resolve => require(['COMPONENTS/admin/UserTitleSetting'], resolve)
   export default {
     components: {UserTitleSetting},
     props: ['power', 'userid'],

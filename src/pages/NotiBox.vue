@@ -33,105 +33,19 @@
 </template>
 
 <script>
-  import NotFound from 'COMPONENTS/NotFound.vue'
-  import NotiCard from 'COMPONENTS/noti/NotiCard.vue'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
+  const NotiCard = resolve => require(['COMPONENTS/noti/NotiCard.vue'], resolve)
+  import { mapGetters } from 'vuex'
   export default {
     components: {NotiCard, NotFound},
     data () {
       return {
         activeType: 'all',
-        count: 3,
-        notis: [
-          {
-            sender_name: '王昌龄',
-            notification_id: 0,
-            avatar: 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=4137574537,1797912673&fm=173&s=52353DC010E0651FC0153C030300B09A&w=218&h=146&img.JPG',
-            sender_id: 2,
-            type: 0,
-            title: '我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你',
-            content: '你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。你让我沉醉。',
-            created_at: '昨天',
-            state: 1
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 1,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            sender_id: 2,
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '12月16日',
-            state: 1
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            sender_id: 2,
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 0
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 3,
-            sender_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 2
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 4,
-            sender_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 2
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 5,
-            sender_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 2
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 6,
-            sender_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 2
-          },
-          {
-            sender_name: '王昌龄',
-            notification_id: 7,
-            sender_id: 2,
-            avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-            type: 2,
-            title: '我为何还咬着你',
-            content: '你让我沉醉。',
-            created_at: '2017年3月16日 17:38',
-            state: 2
-          }
-        ]
+        count: 3
       }
+    },
+    computed: {
+      ...mapGetters(['notis'])
     },
     methods: {
       handleClick () {

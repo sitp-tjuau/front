@@ -23,7 +23,7 @@
         :filters="types"
         :filter-method="filterType"
         filter-placement="bottom-end">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-tag
             :type="colors[scope.row.type]"
             close-transition>{{typesa[scope.row.type]}}</el-tag>

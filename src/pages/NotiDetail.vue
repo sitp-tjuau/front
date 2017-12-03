@@ -7,11 +7,12 @@
       <div id="header">
         <div id="header-left">
           <div class="header-left-item" v-if="noti.send_by_me">我发给&nbsp;&nbsp;&nbsp;</div>
-          <username-and-avatar v-if="noti.type!==0" id="avatar"></username-and-avatar>
+          <username-and-avatar v-if="noti.type!==0" id="avatar"
+                               :user_id="noti.sender_id"></username-and-avatar>
           <el-tooltip class="item" effect="dark" :content="receivers_name_str" placement="top" v-if="noti.send_by_me && noti.receiver_count > 1">
             <div class="header-left-item" >等 <span class="receivers">{{noti.receiver_count}}</span> 人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          <div class="header-left-item">{{ noti.created_at }}</div>
         </el-tooltip>
+          <div class="header-left-item">{{ noti.created_at | dateTimeFormatter(1) }}</div>
         </div>
         <div class="type" v-if="noti.type===0"><i class="iconfont icon-shezhi"></i> 系统消息</div>
         <div class="type" v-else-if="noti.type===1"><i class="iconfont icon-jingbao"></i> 公共通知</div>
@@ -30,7 +31,7 @@
         <div id="content" v-html="noti.content">
           {{ noti.content }}
         </div>
-        <annexs :manage="false" :annexs="annexs" v-if="annexs"></annexs>
+        <annexs :manage="false" v-if="annexs"></annexs>
       </div>
 
       <div id="footer">
@@ -52,7 +53,9 @@
               <i class="iconfont icon-xiaoxi"></i>
             </el-tooltip>
           </el-button>
-          <el-button type="primary" size="small"><i class="iconfont icon-icon_delete"></i> 删除</el-button>
+          <el-button type="primary" size="small" @click="rmNoti(noti.notification_id)">
+            <i class="iconfont icon-icon_delete"></i> 删除
+          </el-button>
           <el-button type="primary" size="small" v-if="!noti.send_by_me" @click="$router.push('/send?to='+noti.sender_id)">
             <i class="iconfont icon-daohang"></i> 回复</el-button>
           <el-button type="primary" size="small" v-else @click="$router.push('/send?to='+noti.first_receiver_id)">
@@ -64,7 +67,9 @@
 </template>
 
 <script>
-  import Annexs from 'COMPONENTS/annexs/Annexs'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
+  import { LOADNOTI, SWITCHNOTISTATE } from 'MODULE/noti'
+  const Annexs = resolve => require(['COMPONENTS/annexs/Annexs'], resolve)
   import UsernameAndAvatar from 'COMPONENTS/UsernameAndAvatar'
   export default {
     components: {
@@ -74,45 +79,66 @@
     data () {
       return {
         fast_reply_text: '',
-        noti: {
-          send_by_me: true,
-          receiver_count: 2,
-          first_receiver_id: 1,
-          receivers_name: ['王昌龄', '孔乙己', '毛景涛', '黄金档'],
-          sender_name: '王昌龄',
-          notification_id: 0,
-          avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-          sender_id: 2,
-          type: 1,
-          title: '我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你我为何还咬着你',
-          content1: '<p>hi</p>',
-          content: '<p><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。</p><p>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如350px），则项目将占据固定空间。</p><h3>4.5 flex属性</h3><h3>4.5 flex属性</h3><h3>4.5 flex属性</h3><h3>4.5 flex属性</h3><h3>4.5 flex属性</h3><p>如果所有项目的<code>flex-grow</code>属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p><h3>4.3 flex-shrink属性</h3><p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>',
-          created_at: '2017年3月16日 17:38',
-          state: 0
-        },
-        annexs: [
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人.doc',
-            file_type: 'doc'
-          },
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人.doc',
-            file_type: 'jpg'
-          },
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人.doc',
-            file_type: 'mp4'
-          }
-        ]
+        isLoad: true
       }
     },
     computed: {
+      ...mapGetters(['noti', 'notis', 'annexs']),
       receivers_name_str () {
         return this.noti.receivers_name.join('、')
       }
+    },
+    watch: {
+      '$route': 'loadNoti'
+    },
+    methods: {
+      ...mapMutations({
+      }),
+      ...mapActions({
+        init: LOADNOTI,
+        setState: SWITCHNOTISTATE
+      }),
+      loadNoti () {
+        console.log('INITDATA NOTI')
+        if (this.$route.params.nid >= 0) {
+          this.init(this.$route.params.nid)
+          this.setState({
+            nid: this.$route.params.nid,
+            value: 2
+          })
+        } else if (this.notis) {
+          this.$router.push({
+            name: 'noti',
+            params: {
+              nid: this.notis[0].notification_id
+            }
+          })
+        } else {
+          this.isLoad = false
+        }
+      },
+      rmNoti (nid) {
+        let index = -1
+        if (this.$route.params.nid === nid) {
+          index = this.notis.findIndex(e => nid === e.notification_id)
+        }
+        this.setState({
+          nid: nid,
+          value: 0
+        })
+        if (index !== -1) {
+          if (!this.notis[index]) index--
+          this.$router.push({
+            name: 'noti',
+            params: {
+              nid: this.notis[index].notification_id
+            }
+          })
+        }
+      }
+    },
+    mounted () {
+      this.loadNoti()
     }
   }
 </script>

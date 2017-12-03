@@ -27,6 +27,9 @@ module.exports = {
       'PAGES': resolve('src/pages'),
       'STYLE': resolve('src/style'),
       'STORE': resolve('src/store'),
+      'UTILS': resolve('src/util'),
+      'MODULE': resolve('src/store/modules'),
+      'API': resolve('src/webApi')
     }
   },
   module: {

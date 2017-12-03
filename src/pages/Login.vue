@@ -39,6 +39,7 @@
     },
     methods: {
       submitForm (formName) {
+        localStorage.setItem('token', 3)
         this.$router.push('/')
       }
     }

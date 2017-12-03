@@ -11,22 +11,8 @@
 <script>
   import AnnexIcon from 'COMPONENTS/annexs/AnnexIcon'
   export default {
-    data () {
-      return {
-        mouseIn: false
-      }
-    },
     components: {
       AnnexIcon
-    },
-    props: ['annex', 'manage', 'k'],
-    methods: {
-      mouseOn () {
-        this.mouseIn = true
-      },
-      mouseOff () {
-        this.mouseIn = false
-      }
     }
   }
 </script>

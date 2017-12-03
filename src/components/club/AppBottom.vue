@@ -16,9 +16,10 @@
             审批被拒绝!
           </span>
           <span v-if="!simple">
-             &nbsp;这篇申请于 {{check_at}} 完成审批。 操作人是
+             &nbsp;这篇申请于 {{check_at | dateTimeFormatter(1) }} 完成审批。 操作人是
           </span>
-          <username-and-avatar class="user" v-if="!simple"></username-and-avatar>
+          <username-and-avatar class="user" v-if="!simple"
+                               :user_id="user_id"></username-and-avatar>
         </div>
         <div class="left" v-else>
           <i class="iconfont icon-jiazai-tianchong"></i>&nbsp;暂未审批。
@@ -87,7 +88,7 @@
     },
     data () {
       return {
-        power: 1,
+        power: 2,
         show: false,
         simple: false,
         toClass: {
@@ -97,6 +98,7 @@
         },
         user_id: 2,
         checker_name: '杜佳豪',
+        checker_avatar: '',
         state: 0,
         check_at: '2017年12月17日 23:17'
       }

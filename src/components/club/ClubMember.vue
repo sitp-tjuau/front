@@ -10,7 +10,7 @@
       </div>
       <div id="item">
         <avatar :avatar="user.avatar" size="middle"></avatar>
-        <span id="name">&nbsp;{{ user.name }} <title-tag :title="user.title"></title-tag></span>
+        <span id="name">&nbsp;{{ user.name }} <title-tag :title="user.title_id"></title-tag></span>
       </div>
     </user-card>
 
@@ -22,23 +22,11 @@
   import Avatar from 'COMPONENTS/Avatar.vue'
   import TitleTag from 'COMPONENTS/TitleTag.vue'
   import UserCardManage from 'COMPONENTS/UserCardManage.vue'
+  import { mapGetters } from 'vuex'
   export default {
-    data () {
-      return {
-        power: 1,
-        user: {
-          user_id: 0,
-          name: '哈哈哈哈',
-          avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507053975712&di=bb72d9e8c070e058803f1e8ab779c5e9&imgtype=0&src=http%3A%2F%2Fwww.hishop.com.cn%2Fuploads%2F150914%2F21678-150914112244436.jpg',
-          club_id: 1,
-          club_name: '同济某社团',
-          title_id: 0,
-          title: '宣传部副部长',
-          campus: '四平路校区',
-          description: '大家好，我没有留下任何足迹。',
-          phone_number: '13201928123'
-        }
-      }
+    props: ['user'],
+    computed: {
+      ...mapGetters(['power'])
     },
     components: {
       UserCard,

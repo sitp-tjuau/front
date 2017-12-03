@@ -14,7 +14,7 @@
         <annex v-for="(value, index) in annexs"
                :key="value.file_name" :annex="value" :manage="manage" :k="index" @rm="rmAnnex(index)"
         ></annex>
-        <new-annex v-if="manage" :key="0"></new-annex>
+        <new-annex v-if="manage" :key="0" @click.native="upload"></new-annex>
       </transition-group>
     </div>
 </template>
@@ -22,17 +22,24 @@
 <script>
   import Annex from './Annex'
   import NewAnnex from './NewAnnex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
+  import { UPLOADANNEX } from 'MODULE/annex'
 
   export default {
     components: {Annex, NewAnnex},
     props: [
-      'annexs',
       'manage'
     ],
+    computed: {
+      ...mapGetters(['annexs'])
+    },
     methods: {
-      rmAnnex (key) {
-        this.annexs.splice(key, 1)
-      }
+      ...mapMutations({
+        rmAnnex: 'annex/REMOVEANNEX'
+      }),
+      ...mapActions({
+        upload: UPLOADANNEX
+      })
     }
   }
 </script>

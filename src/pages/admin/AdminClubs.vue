@@ -37,7 +37,7 @@
         <el-table-column
           label="操作"
           width="165">
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button
               @click.native.prevent="gotoClub(scope.$index, clubs)"
               type="text"

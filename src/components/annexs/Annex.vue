@@ -10,7 +10,7 @@
       </div>
       <transition name="fade">
       <div class="annex-right" v-if="mouseIn">
-        <el-button type="text">
+        <el-button type="text" @click="open(annex.path)">
           <i class="iconfont icon-kejian"></i>
           {{ annex.file_type === 'gif' || annex.file_type === 'jpg' || annex.file_type === 'png'?'预览':'下载'}}
         </el-button>
@@ -43,6 +43,9 @@
       },
       mouseOff () {
         this.mouseIn = false
+      },
+      open (path) {
+        window.open(path)
       }
     }
   }

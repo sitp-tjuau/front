@@ -22,23 +22,24 @@
 <script>
   import ClubHeader from 'COMPONENTS/club/ClubHeader.vue'
   import ClubLeft from 'COMPONENTS/club/ClubLeft.vue'
+  import { mapGetters, mapActions } from 'vuex'
+  import { LOADCLUB } from 'MODULE/club'
   export default {
     name: 'Club',
     components: {
       ClubHeader,
       ClubLeft
     },
-    data () {
-      return {
-        club: {
-          club_id: 0,
-          content: '<h1>和谐社会</h1>',
-          name: '和谐社团',
-          description: '你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮你好漂亮',
-          logo: 'https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png',
-          created_at: '2017年8月24日'
-        }
-      }
+    computed: {
+      ...mapGetters(['club'])
+    },
+    methods: {
+      ...mapActions({
+        initClub: LOADCLUB
+      })
+    },
+    mounted () {
+      this.initClub()
     }
   }
 </script>

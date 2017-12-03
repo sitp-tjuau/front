@@ -32,7 +32,7 @@
 
 <script>
   import PosterCard from 'COMPONENTS/club/PosterCard.vue'
-  import NotFound from 'COMPONENTS/NotFound.vue'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
   export default {
     components: {
       PosterCard,

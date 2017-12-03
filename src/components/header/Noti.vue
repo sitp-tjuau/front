@@ -17,7 +17,6 @@
           </not-found>
           <div id="enter" @click="$router.push('/notification/0')"><i class="iconfont icon-xiafan"></i> 进入通知箱</div>
         </div>
-
       </el-popover>
       <div class="noti-button" v-popover:popovermessage>
         <i class="iconfont" :class="count?'icon-fankui-tianchong':'icon-fankui'"></i>
@@ -28,9 +27,8 @@
 </template>
 
 <script>
-  import NotFound from 'COMPONENTS/NotFound.vue'
-  import NotiCard from 'COMPONENTS/noti/NotiCard.vue'
-  import ElBadge from '../../../node_modules/element-ui/packages/badge/src/main'
+  const NotFound = resolve => require(['COMPONENTS/NotFound'], resolve)
+  const NotiCard = resolve => require(['COMPONENTS/noti/NotiCard.vue'], resolve)
   export default {
     data () {
       return {
@@ -84,7 +82,7 @@
         ]
       }
     },
-    components: {ElBadge, NotiCard, NotFound},
+    components: {NotiCard, NotFound},
     methods: {
     }
   }

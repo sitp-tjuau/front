@@ -14,7 +14,7 @@
             </el-form-item>
             <el-form-item prop="campus">
               <el-radio-group v-model="form.campus">
-                <el-radio-button style="margin-left:2px;" label="所在校区" :disabled="true"></el-radio-button>
+                <el-radio-button style="margin-left:0px;" label="校区名" :disabled="true"></el-radio-button>
                 <el-radio-button class="radio-button" label="四平路校区"></el-radio-button>
                 <el-radio-button class="radio-button" label="嘉定校区"></el-radio-button>
               </el-radio-group>
@@ -46,6 +46,11 @@
                          class="login-btn"
               >提交</el-button>
             </el-form-item>
+            <el-form-item>
+              <el-button type="danger" @click=""
+                         class="login-btn"
+              >注销用户</el-button>
+            </el-form-item>
           </el-form>
 
         </el-tab-pane>
@@ -70,7 +75,7 @@
 </template>
 
 <script>
-  import AvatarUpload from 'COMPONENTS/AvatarUpload'
+  const AvatarUpload = resolve => require(['COMPONENTS/AvatarUpload'], resolve)
   import logo from '@/assets/images/logo.png'
   export default {
     components: {

@@ -21,12 +21,12 @@
               v-if="!noti.is_public"
             >
               <el-option
-                v-for="user in users"
+                v-for="user in userlist"
                 :key="user.user_id"
                 :label="user.name"
                 :value="user.user_id">
                 <span style="float: left">{{ user.name }}</span>
-                <span class="float-right">{{ user.club_name }} - {{ user.title_name }}</span>
+                <span class="float-right">{{ user.club_name }} - {{ titles[user.title_id] }}</span>
               </el-option>
             </el-select>
           </el-form-item>
@@ -77,7 +77,6 @@
         width="400"
         v-model="visibleAnnexs">
         <annexs :manage="true" :annexs="annexs" id="annexs-popover"></annexs>
-
       </el-popover>
       <el-button-group>
         <el-button type="primary" size="small">
@@ -95,15 +94,25 @@
 
 <script>
   import { quillEditor } from 'vue-quill-editor'
-  import ContentForm from 'COMPONENTS/form/ContentForm'
-  import Annexs from 'COMPONENTS/annexs/Annexs'
+  const ContentForm = resolve => require(['COMPONENTS/form/ContentForm'], resolve)
+  const Annexs = resolve => require(['COMPONENTS/annexs/Annexs'], resolve)
   import UsernameAndAvatar from 'COMPONENTS/UsernameAndAvatar'
+
+  import { mapActions, mapGetters } from 'vuex'
+  import { INITUSERLIST } from 'MODULE/user'
+
   export default {
     components: {
       UsernameAndAvatar,
       Annexs,
       ContentForm,
       quillEditor
+    },
+    computed: {
+      ...mapGetters(['power', 'userlist', 'annexs', 'titles']),
+      editor () {
+        return this.$refs.myQuillEditor.quill
+      }
     },
     created () {
       this.fetchData()
@@ -114,43 +123,9 @@
     },
     data () {
       return {
-        power: 2,
         visibleAnnexs: false,
         visibleClear: false,
         inputTitleVisible: false,
-        users: [
-          {
-            user_id: 1,
-            name: '许琨',
-            club_name: '上海上港同济球迷会',
-            title_name: '社长'
-          }, {
-            user_id: 2,
-            name: '许申花',
-            club_name: '同济羽毛球协会',
-            title_name: '副社长'
-          }, {
-            user_id: 3,
-            name: '许国安',
-            club_name: '甜品社',
-            title_name: '宣传部部长'
-          }, {
-            user_id: 4,
-            name: '黄什么哲',
-            club_name: '社团联',
-            title_name: '管理员'
-          }, {
-            user_id: 0,
-            name: '尤什么什么什么什么',
-            club_name: '社团联',
-            title_name: '管理员'
-          }, {
-            user_id: 5,
-            name: '北看台分子',
-            club_name: '社团联',
-            title_name: '指导老师'
-          }
-        ],
         noti: {
           is_public: false,
           receivers_id: [],
@@ -165,34 +140,15 @@
           created_at: '2017年3月16日 17:38',
           state: 0
         },
-        annexs: [
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人.doc',
-            file_type: 'zip'
-          },
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人333333333333333331.doc',
-            file_type: 'jpg'
-          },
-          {
-            path: 'http://www.baidu.com',
-            file_name: '我是中国人2.doc',
-            file_type: 'mp4'
-          }
-        ],
         editorOption: {
           placeholder: '请在此输入正文'
         }
       }
     },
-    computed: {
-      editor () {
-        return this.$refs.myQuillEditor.quill
-      }
-    },
     methods: {
+      ...mapActions({
+        'inituserlist': INITUSERLIST
+      }),
       fetchData () {
         if (this.$route.query.to) {
           this.noti.receivers_id = ('' + (this.$route.query.to)).split(',').map(e => parseInt(e))
@@ -299,7 +255,7 @@
     padding-right: 25px;
   }
   .editor {
-    height: calc( 100% - 66px ) ;
+    height: calc( 100% - 90px ) ;
   }
 
 </style>

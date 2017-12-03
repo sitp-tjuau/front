@@ -28,7 +28,7 @@
       <el-table-column
         label="操作"
         width="170">
-        <template scope="scope">
+        <template slot-scope="scope">
           <modal-user-title-setting></modal-user-title-setting>
           <modal-user-setting></modal-user-setting>
           <el-button

@@ -8,9 +8,9 @@
       <div class="big-left">
       <div class="left">
         <div class="container">
-          <username-and-avatar></username-and-avatar>
+          <username-and-avatar :user_id="app.user_id""></username-and-avatar>
         </div>
-        <div class="ca">提交于 {{app.created_at}}</div>
+        <div class="ca">提交于 {{app.created_at | dateTimeFormatter(2) }}</div>
       </div>
       <div class="title">
         <el-tag type="gray"> <i class="iconfont icon-changdikaitai"></i> 活动场地申请 </el-tag> {{app.activity_name}}

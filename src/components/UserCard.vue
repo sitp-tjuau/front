@@ -25,7 +25,7 @@
           <div class="my-name">
             {{user.name ? user.name : '无姓名'}}
               <span class="my-per" v-if="user.club_id!==0">
-                <title-tag :title="user.title"></title-tag>
+                <title-tag :title="user.title_id"></title-tag>
               </span>
           </div>
           <div class="my-desc">
@@ -55,15 +55,23 @@
 
 <script>
   import TitleTag from 'COMPONENTS/TitleTag.vue'
+  import { mapGetters, mapActions } from 'vuex'
+  import { LOADUSERCARD } from 'MODULE/user'
   export default {
     components: {
       TitleTag
     },
-    props: ['user'],
-    data () {
-      return {
-        permissions: ['创建者', '管理员', '普通用户']
-      }
+    props: ['user_id'],
+    computed: {
+      ...mapGetters({user: 'card_user'})
+    },
+    methods: {
+      ...mapActions({
+        loadCard: LOADUSERCARD
+      })
+    },
+    mounted () {
+      this.loadCard(this.user_id)
     }
   }
 </script>
